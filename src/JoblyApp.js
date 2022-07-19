@@ -1,4 +1,6 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./Routes"
 
 /** Main JoblyApp Component
  * 
@@ -17,7 +19,8 @@ function JoblyApp() {
   return (
     <div className="JoblyApp">
       <BrowserRouter>
-        <Routes />
+        <Navigation />
+        <RoutesList />
       </BrowserRouter>
     </div>
   );
