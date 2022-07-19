@@ -1,0 +1,23 @@
+nav {
+    background-color: slateblue;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  nav a {
+    padding: 0.5em 0;
+    width: 12em;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+  }
+
+  nav a.active {
+    color: rgb(53, 53, 53);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: black;
+    text-decoration: none;
+  }

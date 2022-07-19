@@ -1,5 +1,9 @@
 import React from "react";
 import { Routes, Route, Navigate} from "react-router-dom";
+import CompanyList from "./Company/CompanyList"
+import CompanyDetail from "./Company/CompanyDetail"
+import JobList from "./Job/JobList"
+import Homepage from "./Homepage"
 
 /** Creates endpoints for routes */
 

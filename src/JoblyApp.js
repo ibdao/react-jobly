@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList"
+import Navigation from "./Navigation";
+
 
 /** Main JoblyApp Component
- * 
- *  Props: 
+ *
+ *  Props:
  *  - none
- * 
+ *
  *  State:
  *  - none
  *
