@@ -45,8 +45,8 @@ class JoblyApi {
   }
 
   /** Get list of all companies can filter on provided search filter  */
-  static async getAllOrFilteredCompanies(nameLike) {
-    let res = await this.request(`companies/`, {nameLike});
+  static async getAllOrFilteredCompanies(name) {
+    let res = await this.request(`companies/`, {name});
     return res.companies;
   }
 
