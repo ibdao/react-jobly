@@ -4,12 +4,15 @@ import React, { useState } from "react";
  *
  * Props:
  * - handleSearch: function to call in parent.
+ * 
+ * State:
+ * - formData
  *
  * { CompanyList, JobList } -> SearchForm
  */
 
 function SearchForm({ handleSearch }) {
-  const [formData, setFormData] = useState(undefined);
+  const [formData, setFormData] = useState("");
 
   /** Update form input. */
   function handleChange(evt) {
@@ -21,7 +24,6 @@ function SearchForm({ handleSearch }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSearch(formData);
-    //setFormData("");
   }
 
   return (

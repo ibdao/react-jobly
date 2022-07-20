@@ -15,8 +15,8 @@ import { Link } from "react-router-dom";
 
 function CompanyCard({ company }) {
   return (
-    <Link className="CompanyCard" to={`/companies/${company.handle}`}>
-      <div key={company.handle} >
+    <div key={company.handle}>
+      <Link className="CompanyCard" to={`/companies/${company.handle}`}>
         <h4>
           {company.name}{" "}
           {company.logoUrl && (
@@ -24,8 +24,8 @@ function CompanyCard({ company }) {
           )}
         </h4>
         <p>{company.description}</p>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
