@@ -1,39 +1,48 @@
 import React, { useState } from "react";
 
+
 const DEFAULT_DATA = {
-    username:"", 
-    password:"", 
+  username: "",
+  password: "",
 };
 
 /** Form for logging in
+ *  takes to logged in homepage if succesful
+ *  Displays error message if login fails
  *
  *  Props:
  *  - login function from JoblyApp
  *
  *  State:
  *  - formData
+ *  -errorMessage
  *
  *  { JoblyApp, Navigation } -> LoginForm
  *
  */
-function LoginForm({login}) {
-    const [formData, setFormData] = useState(DEFAULT_DATA);
+function LoginForm({ login }) {
+  const [formData, setFormData] = useState(DEFAULT_DATA);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-    /** Update form input. */
-    function handleChange(evt){
-        const input = evt.target;
-        setFormData(formData => ({
-            ...formData,
-            [input.name] : input.value
-        }))
+  /** Update form input. */
+  function handleChange(evt) {
+    const input = evt.target;
+    setFormData(formData => ({
+      ...formData,
+      [input.name]: input.value
+    }));
 
+  }
+
+  /** Call JoblyApp function */
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      await login(formData);
+    } catch (err) {
+      setErrorMessage(err);
     }
-
-    /** Call JoblyApp function */
-    function handleSubmit(evt){
-        evt.preventDefault();
-        login(formData);
-    }
+  }
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
@@ -60,6 +69,8 @@ function LoginForm({login}) {
           type="password"
         />
       </div>
+      {errorMessage !== null &&
+        <div><p>{errorMessage}</p></div>}
       <button className="btn-primary btn btn-sm LoginBtn">
         Login
       </button>

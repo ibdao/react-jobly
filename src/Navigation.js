@@ -19,7 +19,7 @@ function Navigation({logout}) {
           <NavLink key="companies" to="/companies">Companies</NavLink>
           <NavLink key="jobs" to="/jobs">Jobs</NavLink>
           <NavLink key="profile" to="/profile">Profile</NavLink>
-          <NavLink key="logout" onClick={logout} to="/">Log Out</NavLink>
+          <NavLink key="logout" onClick={logout} to="/">{`Log Out ${currUser.username}`}</NavLink>
         </div>)
         : (<div>
           <NavLink key="login" to="/login">Login</NavLink>

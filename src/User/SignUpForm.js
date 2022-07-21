@@ -1,44 +1,53 @@
 import React, { useState } from "react";
 
+
 const DEFAULT_DATA = {
-    username:"", 
-    password:"", 
-    firstName:"", 
-    lastName:"", 
-    email:"",
+  username: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  email: "",
 };
 
-/** Form for logging in
+/** Form for sign-up
+ * takes to logged in homepage if succesful
+ *  Displays error message if sign-up fails
  *
  *  Props:
  *  - signup is a function from JoblyApp
  *
  *  State:
  *  - formData
+ *  - errorMessage
  *
  *  { JoblyApp, Navigation } -> SignUpForm
  *
  */
 
 
- function SignUpForm({ signup }) {
-    const [formData, setFormData] = useState(DEFAULT_DATA);
+function SignUpForm({ signup }) {
+  const [formData, setFormData] = useState(DEFAULT_DATA);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-    /** Update form input. */
-    function handleChange(evt){
-        const input = evt.target;
-        setFormData(formData => ({
-            ...formData,
-            [input.name] : input.value
-        }))
+  /** Update form input. */
+  function handleChange(evt) {
+    const input = evt.target;
+    setFormData(formData => ({
+      ...formData,
+      [input.name]: input.value
+    }));
 
+  }
+
+  /** Call JoblyApp function*/
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      await signup(formData);
+    } catch (err) {
+      setErrorMessage(err);
     }
-
-    /** Call JoblyApp function*/
-    function handleSubmit(evt){
-        evt.preventDefault();
-        signup(formData);
-    }
+  }
 
   return (
     <form className="SignUpForm" onSubmit={handleSubmit}>
@@ -86,8 +95,8 @@ const DEFAULT_DATA = {
           value={formData.lastName}
           aria-label="Lastname"
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <input
           id="Email"
           name="email"
@@ -98,6 +107,8 @@ const DEFAULT_DATA = {
           aria-label="Email"
         />
       </div>
+      {errorMessage !== null &&
+        <div><p>{errorMessage}</p></div>}
       <button className="btn-primary btn btn-sm LoginBtn">
         Sign Up!
       </button>

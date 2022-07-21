@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import userContext from "../userContext";
+
 
 /** Form for logging in
  *
@@ -12,25 +15,27 @@ import React, { useState } from "react";
  *  { Hompage } -> ProfileForm
  *
  */
- function ProfileForm({handleSave, user}) {
-    const [formData, setFormData] = useState({});
+function ProfileForm({ handleSave, user }) {
+  const { currUser } = useContext(userContext);
+  const [formData, setFormData] = useState(currUser);
 
-    /** Update form input. */
-    function handleChange(evt){
-        const input = evt.target;
-        setFormData(formData => ({
-            ...formData,
-            [input.name] : input.value
-        }))
 
-    }
+  /** Update form input. */
+  function handleChange(evt) {
+    const input = evt.target;
+    setFormData(formData => ({
+      ...formData,
+      [input.name]: input.value
+    }));
 
-    /** Call parent function and clear form */
-    function handleSubmit(evt){
-        evt.preventDefault();
-        handleSave(formData);
-        setFormData({});
-    }
+  }
+
+  /** Call parent function and clear form */
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleSave(formData);
+    setFormData({});
+  }
 
   return (
     <form className="ProfileForm" onSubmit={handleSubmit}>
@@ -49,26 +54,26 @@ import React, { useState } from "react";
       <div>
         <input
           id="Firstname"
-          name="firstname"
+          name="firstName"
           className="form-control"
           placeholder="Firstname"
           onChange={handleChange}
-          value={formData.firstname}
+          value={formData.firstName}
           aria-label="Firstname"
         />
       </div>
       <div>
         <input
           id="Lastname"
-          name="lastname"
+          name="lastName"
           className="form-control"
           placeholder="Lastname"
           onChange={handleChange}
-          value={formData.lastname}
+          value={formData.lastName}
           aria-label="Lastname"
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <input
           id="Email"
           name="email"
