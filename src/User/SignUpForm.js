@@ -39,7 +39,8 @@ function SignUpForm({ signup }) {
 
   }
 
-  /** Call JoblyApp function*/
+  /** Call JoblyApp signup function or
+   * updateErrorMessage state */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {

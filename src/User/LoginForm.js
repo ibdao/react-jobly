@@ -15,7 +15,7 @@ const DEFAULT_DATA = {
  *
  *  State:
  *  - formData
- *  -errorMessage
+ *  - errorMessage
  *
  *  { JoblyApp, Navigation } -> LoginForm
  *
@@ -34,7 +34,8 @@ function LoginForm({ login }) {
 
   }
 
-  /** Call JoblyApp function */
+   /** Call JoblyApp login function or
+   * updateErrorMessage state */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
