@@ -1,8 +1,9 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import RoutesList from "./RoutesList"
+import React, { useState } from "react";
+import { BrowserRouter, useNavigate } from "react-router-dom";
+import RoutesList from "./RoutesList";
 import Navigation from "./Navigation";
 import userContext from "./userContext";
+import JoblyApi from "./api";
 
 
 /** Main JoblyApp Component
@@ -11,7 +12,7 @@ import userContext from "./userContext";
  *  - none
  *
  *  State:
- *  - user : {username, loggedIn, password}
+ *  - user : {username, loggedIn}
  *
  *  Houses routes list
  *
@@ -19,6 +20,26 @@ import userContext from "./userContext";
  */
 
 function JoblyApp() {
+  const [user, setUser] = useState({ token: null, username: "", isLoggedIn: false });
+  const navigate = useNavigate()
+  async function login(userData) {
+    try {
+      const token = await JoblyApi.login(userData);
+      setUser(user => { user.token: token, user.username: userData.username, user.isLoggedIn: true; });
+      navigate("/companies")
+    } catch (err) {
+
+    }
+
+  }
+
+  function signup(userData) {
+
+  }
+
+  function logout() {
+
+  }
 
   return (
     <div className="JoblyApp">
