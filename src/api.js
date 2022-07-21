@@ -46,19 +46,41 @@ class JoblyApi {
 
   /** Get list of all companies can filter on provided search filter  */
   static async getAllOrFilteredCompanies(name) {
-    if(name === "") {name = undefined}
-    let res = await this.request(`companies/`, {name});
+    if (name === "") { name = undefined; }
+    let res = await this.request(`companies/`, { name });
     return res.companies;
   }
 
   /** Get list of all jobs can filter on provided search filter */
   static async getAllOrFilteredJobs(title) {
-    if(title === "") {title = undefined}
-    let res = await this.request(`jobs/`, {title});
+    if (title === "") { title = undefined; }
+    let res = await this.request(`jobs/`, { title });
     return res.jobs;
   }
 
+  /**Register a new user
+   * takes userData: { username, password, firstName, lastName, email },
+   * returns and updates token */
+  static async signUp(userData) {
+    let res = await this.request("/auth/register", userData, "post");
+    this.token = res.token;
+    return this.token;
+  }
 
+  /**Login an already registered user
+   * takes userData: {username, password}
+   * return and update token
+   */
+  static async login(userData) {
+    let res = await this.request("/auth/token", userData, "post");
+    this.token = res.token;
+    return this.token;
+  }
+
+  static logout(){
+    this.token = null;
+    return this.token
+  }
   // obviously, you'll add a lot here ...
 
 
