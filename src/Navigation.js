@@ -12,6 +12,11 @@ function Navigation() {
       <NavLink key="homepage" to="/">Jobly</NavLink>
       <NavLink key="companies" to="/companies">Companies</NavLink>
       <NavLink key="jobs" to="/jobs">Jobs</NavLink>
+      <NavLink key="login" to="/login">Login</NavLink>
+      <NavLink key="signup" to="/signup">Sign Up</NavLink>
+      <NavLink key="profile" to="/profile">Profile</NavLink>
+      <NavLink key="logout" to="/logout">Log Out</NavLink>
+
     </nav>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList"
 import Navigation from "./Navigation";
+import userContext from "./userContext";
 
 
 /** Main JoblyApp Component
@@ -10,7 +11,7 @@ import Navigation from "./Navigation";
  *  - none
  *
  *  State:
- *  - none
+ *  - user : {username, loggedIn, password}
  *
  *  Houses routes list
  *
@@ -18,6 +19,7 @@ import Navigation from "./Navigation";
  */
 
 function JoblyApp() {
+
   return (
     <div className="JoblyApp">
       <BrowserRouter>

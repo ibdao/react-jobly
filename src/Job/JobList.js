@@ -48,7 +48,7 @@ function JobList() {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <div className="JobList">
+    <div className="JobList col-sm-6 mx-auto">
       <h1>Job List</h1>
       {<SearchForm search={debouncedSearch} />}
       <div>

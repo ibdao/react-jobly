@@ -3,7 +3,7 @@ import React, { useState } from "react";
 /** Form for searching
  *
  * Props:
- * - handleSearch: function to call in parent.
+ * - search: function to call in parent.
  *
  * State:
  * - formData

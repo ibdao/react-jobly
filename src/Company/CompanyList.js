@@ -50,7 +50,7 @@ function CompaniesList() {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList col-sm-6 mx-auto">
       <h1>Company List</h1>
       {<SearchForm search={debouncedSearch} />}
       <div>

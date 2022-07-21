@@ -2,8 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    max-width: 500px;
+    min-width: 500px;
+    max-width: 1500px;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
