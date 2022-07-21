@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 
+const DEFAULT_DATA = {
+    username:"", 
+    password:"", 
+    firstName:"", 
+    lastName:"", 
+    email:"",
+};
+
 /** Form for logging in
  *
  *  Props:
- *  - handleSave
+ *  - signup is a function from JoblyApp
  *
  *  State:
  *  - formData
  *
- *  { Hompage } -> SignUpForm
+ *  { JoblyApp, Navigation } -> SignUpForm
  *
  */
- function SignUpForm({handleSave}) {
-    const [formData, setFormData] = useState({});
+
+
+ function SignUpForm({ signup }) {
+    const [formData, setFormData] = useState(DEFAULT_DATA);
 
     /** Update form input. */
     function handleChange(evt){
@@ -24,11 +34,10 @@ import React, { useState } from "react";
 
     }
 
-    /** Call parent function and clear form */
+    /** Call JoblyApp function*/
     function handleSubmit(evt){
         evt.preventDefault();
-        handleSave(formData);
-        setFormData({});
+        signup(formData);
     }
 
   return (
@@ -59,22 +68,22 @@ import React, { useState } from "react";
       <div>
         <input
           id="Firstname"
-          name="firstname"
+          name="firstName"
           className="form-control"
           placeholder="Firstname"
           onChange={handleChange}
-          value={formData.firstname}
+          value={formData.firstName}
           aria-label="Firstname"
         />
       </div>
       <div>
         <input
           id="Lastname"
-          name="lastname"
+          name="lastName"
           className="form-control"
           placeholder="Lastname"
           onChange={handleChange}
-          value={formData.lastname}
+          value={formData.lastName}
           aria-label="Lastname"
         />
         </div>

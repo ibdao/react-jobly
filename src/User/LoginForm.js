@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 
+const DEFAULT_DATA = {
+    username:"", 
+    password:"", 
+};
+
 /** Form for logging in
  *
  *  Props:
- *  - handleSave
+ *  - login function from JoblyApp
  *
  *  State:
  *  - formData
  *
- *  { Hompage } -> LoginForm
+ *  { JoblyApp, Navigation } -> LoginForm
  *
  */
-function LoginForm({handleSave}) {
-    const [formData, setFormData] = useState({});
+function LoginForm({login}) {
+    const [formData, setFormData] = useState(DEFAULT_DATA);
 
     /** Update form input. */
     function handleChange(evt){
@@ -24,10 +29,10 @@ function LoginForm({handleSave}) {
 
     }
 
-    /** Call parent function */
+    /** Call JoblyApp function */
     function handleSubmit(evt){
         evt.preventDefault();
-        handleSave(formData);
+        login(formData);
     }
 
   return (
@@ -35,7 +40,7 @@ function LoginForm({handleSave}) {
       <div>
         <input
           id="Username"
-          name="Username"
+          name="username"
           className="form-control"
           placeholder="Username"
           onChange={handleChange}
@@ -46,7 +51,7 @@ function LoginForm({handleSave}) {
       <div>
         <input
           id="Password"
-          name="Password"
+          name="password"
           className="form-control"
           placeholder="Password"
           onChange={handleChange}
