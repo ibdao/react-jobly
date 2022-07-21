@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import SearchForm from "../SearchForm";
 import JobCardList from "./JobCardList";
+import { debounce } from "lodash";
 
 /** Shows a list of all the jobs
  *
@@ -11,9 +12,9 @@ import JobCardList from "./JobCardList";
  * State:
  * - jobs: [{id, title, companyHandle, companyName, salary, equity}... ]
  * - isLoading: boolean
- * - searchData: "searchTerm"
- * 
- * Effects: 
+ * - searchTerm: "term"
+ *
+ * Effects:
  *  - axios call to Jobly API
  *
  * {JoblyApp, Navigation} -> JobList -> {JobCardList, SearchForm}
@@ -22,42 +23,38 @@ import JobCardList from "./JobCardList";
 function JobList() {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchData, setSearchData] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState("");
 
   /** Calls JoblyApi to get all jobs or search criteria */
   useEffect(
-    function fetchJobsWhenMounted() {
+    function fetchJobsWhenMountedOrSearch() {
       async function fetchJobs() {
-        const response = await JoblyApi.getAllOrFilteredJobs(searchData);
-        console.log(response);
-        setJobs(response);
+        const apiJobs = await JoblyApi.getAllOrFilteredJobs(searchTerm);
+        setJobs(apiJobs);
         setIsLoading(false);
       }
       fetchJobs();
     },
-    [searchData]
+    [searchTerm]
   );
 
-  /** Sets the search criteria for API call
-   *  Takes a search term form the form.
-   */
-  function search(searchTerm) {
-    setSearchData(searchTerm);
-  }
-
-  // If search field is empty, return all jobs
-  if (searchData === "") {
-    setSearchData(undefined);
-  }
+  /**live search feature
+   * Sets the search criteria for API call
+   *  Takes a search term fromm the form*/
+  const debouncedSearch = debounce(searchTerm => {
+    setSearchTerm(searchTerm);
+  }, 500);
 
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="JobList">
-      <h1>JobList</h1>
-      {<SearchForm handleSearch={search} />}
+      <h1>Job List</h1>
+      {<SearchForm search={debouncedSearch} />}
       <div>
-        <JobCardList jobs={jobs} />
+        {jobs.length > 0
+          ? <JobCardList jobs={jobs} />
+          : <h4>No Jobs Match for: {searchTerm}</h4>}
       </div>
     </div>
   );

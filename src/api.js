@@ -46,12 +46,14 @@ class JoblyApi {
 
   /** Get list of all companies can filter on provided search filter  */
   static async getAllOrFilteredCompanies(name) {
+    if(name === "") {name = undefined}
     let res = await this.request(`companies/`, {name});
     return res.companies;
   }
 
   /** Get list of all jobs can filter on provided search filter */
   static async getAllOrFilteredJobs(title) {
+    if(title === "") {title = undefined}
     let res = await this.request(`jobs/`, {title});
     return res.jobs;
   }

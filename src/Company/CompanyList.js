@@ -3,18 +3,19 @@ import CompanyCard from "./CompanyCard";
 import JoblyApi from "../api";
 import "./CompanyList.css";
 import SearchForm from "../SearchForm";
+import { debounce } from "lodash";
 
 /** Returns a list of all the companies
- * 
+ *
  * Props:
  * - none
  *
- * State: 
+ * State:
  *  - companies: [{name, handle, description, [jobs], numEmployees, logoUrl}, ...]
  *  - isLoading: boolean
- *  - searchData: "searchTerm"
- * 
- * Effects: 
+ *  - searchTerm: "searchTerm"
+ *
+ * Effects:
  *  - axios call
  *
  * {joblyApp, Navigation} -> CompaniesList -> CompanyCard
@@ -23,44 +24,41 @@ import SearchForm from "../SearchForm";
 function CompaniesList() {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchData, setSearchData] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState("");
 
   /** Calls JoblyApi to get all companies or search criteria */
   useEffect(
-    function fetchCompaniesWhenMounted() {
+    function fetchCompaniesWhenMountedorSearch() {
       async function fetchCompanies() {
-        const response = await JoblyApi.getAllOrFilteredCompanies(searchData);
-        console.log(response);
-        setCompanies(response);
+        const apiCompanies = await JoblyApi.getAllOrFilteredCompanies(searchTerm);
+        console.log(apiCompanies);
+        setCompanies(apiCompanies);
         setIsLoading(false);
       }
       fetchCompanies();
     },
-    [searchData]
+    [searchTerm]
   );
 
-  /** Sets the search criteria for API call
-   *  Takes a search term form the form.
-   */
-  function search(searchTerm) {
-    setSearchData(searchTerm);
-  }
-
-  // If search field is empty, return all companies
-  if (searchData === "") {
-    setSearchData(undefined);
-  }
+  /**live search feature
+   * Sets the search criteria for API call
+   *  Takes a search term fromm the form*/
+  const debouncedSearch = debounce(searchTerm => {
+    setSearchTerm(searchTerm);
+  }, 500);
 
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="CompanyList">
-      <h1>CompaniesList</h1>
-      {<SearchForm handleSearch={search} />}
+      <h1>Company List</h1>
+      {<SearchForm search={debouncedSearch} />}
       <div>
-        {companies.map((company) => (
-          <CompanyCard company={company} key={company.handle} />
-        ))}
+        {companies.length > 0
+          ? companies.map((company) => (
+            <CompanyCard company={company} key={company.handle} />
+          ))
+          : <h4>No Companies Match for: {searchTerm}</h4>}
       </div>
     </div>
   );

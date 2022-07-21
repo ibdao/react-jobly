@@ -4,31 +4,31 @@ import React, { useState } from "react";
  *
  * Props:
  * - handleSearch: function to call in parent.
- * 
+ *
  * State:
  * - formData
  *
  * { CompanyList, JobList } -> SearchForm
  */
 
-function SearchForm({ handleSearch }) {
-  const [formData, setFormData] = useState("");
+function SearchForm({ search }) {
+  const [term, setTerm] = useState("");
 
+  // /**live search feature Call parent function*/
+  // const debouncedSearch = debounce(async (searchTerm) => {
+  //   setTerm(await handleSearch(searchTerm));
+  // }, 1000);
+
+  //console.log(term)
   /** Update form input. */
   function handleChange(evt) {
     const input = evt.target;
-    setFormData(input.value);
-  }
-
-  /** Call parent function and clear form. */
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    handleSearch(formData);
+    setTerm(input.value);
+    search(input.value);
   }
 
   return (
-    <form className="SearchForm" onSubmit={handleSubmit}>
-
+    <form className="SearchForm" >
       <div className="mb-3">
         <input
           id="Search"
@@ -36,14 +36,11 @@ function SearchForm({ handleSearch }) {
           className="form-control"
           placeholder="Search"
           onChange={handleChange}
-          value={formData}
+          value={term}
           aria-label="Search"
         />
       </div>
-      <button className="btn-primary btn btn-sm SearchForm-addBtn">
-        Search
-      </button>
-      </form >
+    </form >
   );
 }
 
