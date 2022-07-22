@@ -17,13 +17,13 @@ function CompanyCard({ company }) {
   return (
     <div key={company.handle}>
       <Link className="CompanyCard" to={`/companies/${company.handle}`}>
-        <h4>
-          {company.name}{" "}
+        <h5 >
+          <div className="CompanyCard-Title">{company.name}</div>{" "}
           {company.logoUrl && (
-            <img src={company.logoUrl} alt={company.name}></img>
+            <img src={company.logoUrl} alt={company.name} className="CompanyCard-Image"></img>
           )}
-        </h4>
-        <p>{company.description}</p>
+        </h5>
+        <p className="CompanyCard-Description">{company.description}</p>
       </Link>
     </div>
   );

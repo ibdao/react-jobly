@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./LoginForm.css"
 
 
 const DEFAULT_DATA = {
@@ -46,8 +47,9 @@ function LoginForm({ login }) {
   }
 
   return (
-    <form className="LoginForm" onSubmit={handleSubmit}>
-      <div>
+    <form className="LoginForm col-md-6 offset-md-3 col-lg-4 offset-lg-4" 
+      onSubmit={handleSubmit}>
+      <div className="mb-3">
         <input
           id="Username"
           name="username"
@@ -58,7 +60,7 @@ function LoginForm({ login }) {
           aria-label="Username"
         />
       </div>
-      <div>
+      <div className="mb-3">
         <input
           id="Password"
           name="password"
@@ -71,8 +73,8 @@ function LoginForm({ login }) {
         />
       </div>
       {errorMessages !== null &&
-        <div><p>{errorMessages}</p></div>}
-      <button className="btn-primary btn btn-sm LoginBtn">
+        <div className="alert"><p>{errorMessages}</p></div>}
+      <button className="btn-primary btn btn-md LoginBtn">
         Login
       </button>
     </form>

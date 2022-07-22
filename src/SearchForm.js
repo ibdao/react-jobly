@@ -14,12 +14,6 @@ import React, { useState } from "react";
 function SearchForm({ search }) {
   const [term, setTerm] = useState("");
 
-  // /**live search feature Call parent function*/
-  // const debouncedSearch = debounce(async (searchTerm) => {
-  //   setTerm(await handleSearch(searchTerm));
-  // }, 1000);
-
-  //console.log(term)
   /** Update form input. */
   function handleChange(evt) {
     const input = evt.target;
@@ -28,7 +22,7 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form className="SearchForm" >
+    <form className="SearchForm col-md-8 offset-md-2" >
       <div className="mb-3">
         <input
           id="Search"

@@ -3,6 +3,7 @@ import JoblyApi from "../api";
 import SearchForm from "../SearchForm";
 import JobCardList from "./JobCardList";
 import { debounce } from "lodash";
+import "./JobList.css";
 
 /** Shows a list of all the jobs
  *
@@ -48,7 +49,7 @@ function JobList() {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <div className="JobList col-sm-6 mx-auto">
+    <div className="JobList col-md-8 offset-md-2">
       <h1>Job List</h1>
       {<SearchForm search={debouncedSearch} />}
       <div>

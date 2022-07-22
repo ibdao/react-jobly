@@ -1,8 +1,7 @@
 .JobCard {
-    position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 500px;
+    min-width: 750px;
     max-width: 1500px;
     word-wrap: break-word;
     background-color: #fff;

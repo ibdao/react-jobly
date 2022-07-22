@@ -14,8 +14,8 @@ import "./JobCard.css";
 
 function JobCard({ job }) {
   return (
-    <div key={job.id} className="JobCard">
-        <h4>{job.title}</h4>
+    <div key={job.id} className="JobCard ">
+        <h3>{job.title}</h3>
         <h5>{job.companyName}</h5>
         <p>Salary: {job.salary}</p>
         <p>Equity: {job.equity}</p>

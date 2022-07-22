@@ -14,3 +14,24 @@
     justify-content: center;
     margin-bottom: 1rem;
 }
+
+.CompanyCard-Image{
+    position: absolute;
+    width: 60px;
+    right: 30px;
+    top: 10px;
+
+}
+
+.CompanyCard-Title{
+    text-align: left;
+    position: relative;
+    left:10px;
+}
+
+p {
+    position: relative;
+    top: 10px;
+    text-align: left;
+    left: 10px
+}

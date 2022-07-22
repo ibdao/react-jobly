@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import userContext from "../userContext";
+import "./ProfileForm.css"
 
 
 /** Form for logging in
@@ -39,15 +40,16 @@ function ProfileForm({ update }) {
     evt.preventDefault();
     try {
       await update(formData);
-      setMessages("Profile Updated Successfully");
+      setMessages({msg:"Profile Updated Successfully", color:"green"});
     } catch (err) {
-      setMessages(err);
+      setMessages({msg: err[0], color: 'red'});
     }
   }
 
   return (
-    <form className="ProfileForm" onSubmit={handleSubmit}>
-      <div>
+    <form className="ProfileForm col-md-6 offset-md-3 col-lg-4 offset-lg-4" 
+    onSubmit={handleSubmit}>
+      <div className="mb-2 col-md-7">
         <input
           id="Username"
           name="username"
@@ -59,7 +61,7 @@ function ProfileForm({ update }) {
           disabled
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Firstname"
           name="firstName"
@@ -70,7 +72,7 @@ function ProfileForm({ update }) {
           aria-label="Firstname"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Lastname"
           name="lastName"
@@ -81,7 +83,7 @@ function ProfileForm({ update }) {
           aria-label="Lastname"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Email"
           name="email"
@@ -93,8 +95,12 @@ function ProfileForm({ update }) {
         />
       </div>
       {messages !== null &&
-        <div><p>{messages}</p></div>}
-      <button className="btn-primary btn btn-sm LoginBtn">
+        <div>
+          <p style={{color:`${messages.color}`, textShadow: "-1px 1px 3px #ffffff" }}>
+            <b>{messages.msg}</b>
+            </p>
+        </div>}
+      <button className="btn-primary btn btn-md">
         Update!
       </button>
     </form>

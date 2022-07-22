@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {useContext} from "react";
 import userContext from "./userContext";
+import "./Homepage.css"
 
 /** Renders the HomePage
  *
@@ -11,14 +12,14 @@ function HomePage() {
   const {currUser} = useContext(userContext)
 
   return (
-    <div>
-      <h1>Jobly HomePage</h1>
-      <p>Let's find a job!!</p>
+    <div className="Homepage">
+      <h1 className="mb-4 fw-bold">Jobly</h1>
+      <p className="lead">Let's find a job!!</p>
       {currUser !== null
       ? <h3>{`Welcome back ${currUser.firstName}`}</h3>
       : (<div>
       <NavLink key="login" to="/login">
-        <button className="btn-primary btn btn-sm fw-bold">
+        <button className="btn-primary btn btn-sm fw-bold me-3">
           Login
         </button>
       </NavLink>

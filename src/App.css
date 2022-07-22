@@ -1,6 +1,13 @@
 .App {
+  min-height: 100%;
   text-align: center;
-  background-color: salmon;
+  background: url("/public/background.png");
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 0 0 80px;
+  margin:auto;
 }
 
 

@@ -24,7 +24,6 @@ import jwtDecode from "jwt-decode";
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
-  console.log("currUser=", currUser, "token=", token);
 
 
   /** Checks to see if there is a token in local storage on first render
@@ -120,7 +119,9 @@ function JoblyApp() {
     setCurrUser(userFromApi);
   }
 
-  if (currUser === null && localStorage.getItem("token")) return <h1>Loading...</h1>;
+  if (currUser === null && localStorage.getItem("token")) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <div className="JoblyApp">

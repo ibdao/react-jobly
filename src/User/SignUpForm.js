@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SignUpForm.css";
 
 
 const DEFAULT_DATA = {
@@ -51,8 +52,9 @@ function SignUpForm({ signup }) {
   }
 
   return (
-    <form className="SignUpForm" onSubmit={handleSubmit}>
-      <div>
+    <form className="SignUpForm col-md-6 offset-md-3 col-lg-4 offset-lg-4" 
+      onSubmit={handleSubmit}>
+      <div className="mb-2 col-md-7">
         <input
           id="Username"
           name="username"
@@ -63,7 +65,7 @@ function SignUpForm({ signup }) {
           aria-label="Username"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Password"
           name="password"
@@ -75,7 +77,7 @@ function SignUpForm({ signup }) {
           type="password"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Firstname"
           name="firstName"
@@ -86,7 +88,7 @@ function SignUpForm({ signup }) {
           aria-label="Firstname"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Lastname"
           name="lastName"
@@ -97,7 +99,7 @@ function SignUpForm({ signup }) {
           aria-label="Lastname"
         />
       </div>
-      <div>
+      <div className="mb-2 col-md-7">
         <input
           id="Email"
           name="email"
@@ -109,8 +111,8 @@ function SignUpForm({ signup }) {
         />
       </div>
       {errorMessages !== null &&
-        <div><p>{errorMessages}</p></div>}
-      <button className="btn-primary btn btn-sm LoginBtn">
+        <div className="alert"><p>{errorMessages}</p></div>}
+      <button className="btn-primary btn btn-md LoginBtn">
         Sign Up!
       </button>
     </form>
