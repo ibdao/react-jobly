@@ -73,28 +73,39 @@ class JoblyApi {
    * takes userData: {username, password}
    * return and update token
    */
-  static async login(userData) {
+  static async logIn(userData) {
     let res = await this.request("auth/token", userData, "post");
     this.token = res.token;
     return this.token;
   }
 
-  static logout(){
+  /** logs user out and sets this.token to null */
+  static logOut() {
     this.token = null;
-    return this.token
+    return this.token;
   }
-  // obviously, you'll add a lot here ...
 
-  /** Returns a user from the API given a username. 
+  /** Returns a user from the API given a username.
    *  User must be logged in.
    */
 
-  static async getUser(username){
+  static async getUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
   }
-
-
+  /**takes user data and calls api to update user info.
+   * takes userData: {firstName, lastName, email}
+   * User must be logged in.
+   */
+  static async updateUser(userData) {
+    const { firstName, lastName, email } = userData;
+    let res = await this.request(
+      `users/${userData.username}`,
+      { firstName, lastName, email },
+      "patch"
+    );
+    return res.user;
+  }
 
 }
 

@@ -11,7 +11,7 @@ import userContext from "./userContext";
 
 /** Creates endpoints for routes */
 
-function RoutesList({ login, signup }) {
+function RoutesList({ login, signup, update }) {
   const { currUser } = useContext(userContext);
   return (
     <div>
@@ -24,7 +24,7 @@ function RoutesList({ login, signup }) {
         </Routes>
       ) : (
         <Routes>
-          <Route element={<ProfileForm />} path="/profile" />
+          <Route element={<ProfileForm update={update} />} path="/profile" />
           <Route element={<CompanyList />} path="/companies" />
           <Route element={<CompanyDetail />} path="/companies/:handle" />
           <Route element={<JobList />} path="/jobs" />

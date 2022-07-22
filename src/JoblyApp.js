@@ -24,12 +24,14 @@ import jwtDecode from "jwt-decode";
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
+  console.log("currUser=", currUser, "token=", token);
+
 
   /** Checks to see if there is a token in local storage on first render
-   *  if there is, sets API token to existing token. 
+   *  if there is, sets API token and state to existing token.
+   *
    */
-
-  useEffect(() => {
+  useEffect(function checkLocalStorageAndSetToken() {
     console.log("checks local storage");
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken) {
@@ -43,10 +45,15 @@ function JoblyApp() {
     function fetchUserDataWhenTokenChanges() {
       async function fetchUser() {
         if (token) {
-          const { username } = jwtDecode(token);
-          const userFromAPI = await JoblyApi.getUser(username);
-          setCurrUser(userFromAPI);
-          localStorage.setItem("token", token);
+          try {
+            const { username } = jwtDecode(token);
+            const userFromAPI = await JoblyApi.getUser(username);
+            setCurrUser(userFromAPI);
+            localStorage.setItem("token", token);
+          } catch (err) {
+            setCurrUser(null);
+            setToken(null);
+          }
         } else {
           setCurrUser(null);
         }
@@ -67,7 +74,7 @@ function JoblyApp() {
    *
    */
   async function login(userData) {
-    const token = await JoblyApi.login(userData);
+    const token = await JoblyApi.logIn(userData);
     setToken(token);
   }
 
@@ -86,25 +93,41 @@ function JoblyApp() {
   }
 
   /** Logout function
-   * 
+   *
    *  Clears local storage
    *
    *  Sets
    *  - token to null
-   *  
+   *
    */
   function logout() {
-    const token = JoblyApi.logout();
+    const token = JoblyApi.logOut();
     setToken(token);
     localStorage.clear();
   }
+
+  /**update function
+   *
+   * updates user info
+   *
+   * takes userData: {username, firstName, lastName, email}
+   *
+   * sets:
+   *  -currUser
+   */
+  async function update(userData) {
+    const userFromApi = await JoblyApi.updateUser(userData);
+    setCurrUser(userFromApi);
+  }
+
+  if (currUser === null && localStorage.getItem("token")) return <h1>Loading...</h1>;
 
   return (
     <div className="JoblyApp">
       <userContext.Provider value={{ currUser, token }}>
         <BrowserRouter>
           <Navigation logout={logout} />
-          <RoutesList login={login} signup={signup} />
+          <RoutesList login={login} signup={signup} update={update} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

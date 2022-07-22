@@ -6,18 +6,19 @@ import userContext from "../userContext";
 /** Form for logging in
  *
  *  Props:
- *  - handleSave
- *  - user
+ *  - update
  *
  *  State:
  *  - formData
+ *  - messages
  *
- *  { Hompage } -> ProfileForm
+ *  { Homepage } -> ProfileForm
  *
  */
-function ProfileForm({ handleSave, user }) {
+function ProfileForm({ update }) {
   const { currUser } = useContext(userContext);
   const [formData, setFormData] = useState(currUser);
+  const [messages, setMessages] = useState(null);
 
 
   /** Update form input. */
@@ -30,11 +31,18 @@ function ProfileForm({ handleSave, user }) {
 
   }
 
-  /** Call parent function and clear form */
-  function handleSubmit(evt) {
+  /** Call joblyApp update function
+   *
+   * setMessage to successful or error
+   */
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleSave(formData);
-    setFormData({});
+    try {
+      await update(formData);
+      setMessages("Profile Updated Successfully");
+    } catch (err) {
+      setMessages(err);
+    }
   }
 
   return (
@@ -84,6 +92,8 @@ function ProfileForm({ handleSave, user }) {
           aria-label="Email"
         />
       </div>
+      {messages !== null &&
+        <div><p>{messages}</p></div>}
       <button className="btn-primary btn btn-sm LoginBtn">
         Update!
       </button>
