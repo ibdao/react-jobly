@@ -27,7 +27,7 @@ const DEFAULT_DATA = {
 
 function SignUpForm({ signup }) {
   const [formData, setFormData] = useState(DEFAULT_DATA);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessages, setErrorMessages] = useState(null);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -46,7 +46,7 @@ function SignUpForm({ signup }) {
     try {
       await signup(formData);
     } catch (err) {
-      setErrorMessage(err);
+      setErrorMessages(err);
     }
   }
 
@@ -108,8 +108,8 @@ function SignUpForm({ signup }) {
           aria-label="Email"
         />
       </div>
-      {errorMessage !== null &&
-        <div><p>{errorMessage}</p></div>}
+      {errorMessages !== null &&
+        <div><p>{errorMessages}</p></div>}
       <button className="btn-primary btn btn-sm LoginBtn">
         Sign Up!
       </button>

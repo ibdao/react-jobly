@@ -4,6 +4,7 @@ import RoutesList from "./RoutesList";
 import Navigation from "./Navigation";
 import userContext from "./userContext";
 import JoblyApi from "./api";
+import { useJwt } from "react-jwt";
 
 
 /** Main JoblyApp Component
@@ -15,7 +16,7 @@ import JoblyApi from "./api";
  *  - currUser :
  *    {user: {username, password, firstName, lastName, email, isAdmin, [jobs]}}
  *
- *  - token : null of obj {token, username}
+ *  - token : null or string
  *
  *
  *  Houses routes list
@@ -26,13 +27,16 @@ import JoblyApi from "./api";
 function JoblyApp() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
+  const { decodedToken } = useJwt(token)
+  console.log("decodedToken", decodedToken)
+
 
 
   /** Calls JoblyApi to get user when token changes. */
   useEffect(function fetchUserDataWhenTokenChanges() {
     async function fetchUser() {
-      if (token) {
-          const userFromAPI = await JoblyApi.getUser(token.username);
+      if (decodedToken) {
+          const userFromAPI = await JoblyApi.getUser(decodedToken.username);
           setCurrUser(userFromAPI);
       } else {
         setCurrUser(null);
@@ -41,7 +45,7 @@ function JoblyApp() {
 
     fetchUser();
 
-  }, [token]
+  }, [decodedToken]
   );
 
   /** Login function makes API call
@@ -50,13 +54,12 @@ function JoblyApp() {
    *  - form data from LoginForm
    *
    *  Sets
-   *  - token and currUser.username
+   *  - token
    *
     */
   async function login(userData) {
     const token = await JoblyApi.login(userData);
-    const username = userData.username
-    setToken({token, username});
+    setToken(token);
 
   }
 
@@ -66,13 +69,12 @@ function JoblyApp() {
    *  - form data from SignUpForm
    *
    *  Sets
-   *  - token and currUser.username
+   *  - token
    *
   */
   async function signup(userData) {
     const token = await JoblyApi.signUp(userData);
-    const username = userData.username
-    setToken({token, username});
+    setToken(token);
 
   }
 

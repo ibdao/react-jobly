@@ -15,14 +15,14 @@ const DEFAULT_DATA = {
  *
  *  State:
  *  - formData
- *  - errorMessage
+ *  - errorMessages
  *
  *  { JoblyApp, Navigation } -> LoginForm
  *
  */
 function LoginForm({ login }) {
   const [formData, setFormData] = useState(DEFAULT_DATA);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessages, setErrorMessages] = useState(null);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -41,7 +41,7 @@ function LoginForm({ login }) {
     try {
       await login(formData);
     } catch (err) {
-      setErrorMessage(err);
+      setErrorMessages(err);
     }
   }
 
@@ -70,8 +70,8 @@ function LoginForm({ login }) {
           type="password"
         />
       </div>
-      {errorMessage !== null &&
-        <div><p>{errorMessage}</p></div>}
+      {errorMessages !== null &&
+        <div><p>{errorMessages}</p></div>}
       <button className="btn-primary btn btn-sm LoginBtn">
         Login
       </button>
