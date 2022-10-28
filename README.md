@@ -1,5 +1,11 @@
 # Jobly is a job searching application built using Create-React-App.
 
+# To Get Jobly running on your local machine...
+Please clone this repository and <a href='https://github.com/ibdao/react-jobly-backend'> react-jobly-backend repository. 
+
+Please create a PSQL database named: 'jobly' using jobly.sql from the backend repo. 
+From commandline this can be done by : createdb -f jobly.sql 
+
 ## Available Scripts
 
 In the project directory, you can run:
