@@ -4,7 +4,9 @@
 Please clone this repository and <a href='https://github.com/ibdao/react-jobly-backend'> react-jobly-backend repository. 
 
 Please create a PSQL database named: 'jobly' using jobly.sql from the backend repo. 
-From commandline this can be done by : createdb -f jobly.sql 
+From commandline this can be done by : psql -f jobly.sql 
+
+if 'react-scripts' not found: Please type 'npm install react-scripts' in your project directory. 
 
 ## Available Scripts
 
