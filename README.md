@@ -1,6 +1,6 @@
 # Jobly is a job searching application built using Create-React-App.
 
-# A live demo
+### A live demo of Jobly can be found here <a href='https://obsolete-band.surge.sh/'>Ian's jobly</a>
 
 # To Get Jobly running on your local machine...
 Please clone this repository and <a href='https://github.com/ibdao/react-jobly-backend'> react-jobly-backend repository. 
