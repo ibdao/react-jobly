@@ -13,3 +13,8 @@ From commandline this can be done by : psql -f jobly.sql
 Start Jobly by typing: 'npm start' in your command line
   if 'react-scripts' not found: Please type 'npm install react-scripts' in your project directory. 
   then try 'npm start' again. 
+  
+Jobly is created using the following technologies:
+Front end : React,
+Back end : Express.js,
+Database : PostgreSQL
