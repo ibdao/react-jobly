@@ -14,6 +14,9 @@ Start Jobly by typing: 'npm start' in your command line
   if 'react-scripts' not found: Please type 'npm install react-scripts' in your project directory. 
   then try 'npm start' again. 
   
+  Also make sure your backend is running
+    Enter backend project folder and type in the commandline: node server.js
+  
 Jobly is created using the following technologies:
 Front end : React,
 Back end : Express.js,
